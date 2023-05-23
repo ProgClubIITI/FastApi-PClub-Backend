@@ -6,9 +6,22 @@ from typing import List
 from pydantic import BaseModel, Field
 from enum import Enum
 from sqlalchemy.ext.declarative import declarative_base
-
-
+from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
+from fastapi import FastAPI, File, UploadFile, Form, Response, HTTPException, Request
+import time
+from starlette.responses import Response
 app = FastAPI(debug=True)
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Define the database URL
 database_url = "postgresql://prog_club_website_database_user:SWtTkh5nXvcd9MJx0sFFtCTJbWt254ST@dpg-cgd9vfg2qv2aq5jp1s7g-a.singapore-postgres.render.com/prog_club_website_database"
